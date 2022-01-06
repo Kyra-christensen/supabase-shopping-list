@@ -1,5 +1,5 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://xslhcftovceavryztfcs.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsImlhdCI6MTY0MTUwODQ5MSwiZXhwIjoxOTU3MDg0NDkxfQ.Knrrk29tfhmfWM7wD-rXhLpwRAA-WG6tZQ_2uN_StNg';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
@@ -16,7 +16,7 @@ export async function checkAuth() {
 
 export async function redirectIfLoggedIn() {
     if (await getUser()) {
-        location.replace('./other-page');
+        location.replace('./shopping-list');
     }
 }
 
