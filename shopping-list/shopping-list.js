@@ -50,15 +50,15 @@ async function displayShoppingListItems() {
     for (let item of list) {
         const listItemEl = renderItem(item);
 
-        if (item.bought === false) {
-            listItemEl.addEventListener('click', async() => {
-                await updateBoughtItem(item.id);
-                displayShoppingListItems();
-                console.log(item);
-            });
-        }
+        listItemEl.addEventListener('click', async() => {
+            await updateBoughtItem(item.id);
+            displayShoppingListItems();
+            console.log(item);
+        });
+     
         
         listEl.append(listItemEl);
+        
     }
-     
+    
 }
