@@ -1,4 +1,9 @@
-import { checkAuth, logout } from '../fetch-utils.js';
+import { checkAuth, 
+    logout,
+    getItem,
+    createDefaultItem,
+    updateBoughtItem,
+    deleteList } from '../fetch-utils.js';
 
 checkAuth();
 
@@ -12,3 +17,8 @@ console.log(listEl, listForm, deleteButton);
 logoutButton.addEventListener('click', () => {
     logout();
 });
+
+window.addEventListener('load', async() => {
+    displayShoppingListItems();
+});
+

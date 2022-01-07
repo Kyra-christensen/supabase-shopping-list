@@ -3,6 +3,37 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiYW5vbiIsI
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
+export async function getItem() {
+    const response = await client
+        .from('list')
+        .select();
+    return response;
+}
+
+export async function createDefaultItem(item, quantity) {
+    const response = await client
+        .from('list')
+        .insert ([{ item, 
+            quantity,
+            bought: false }]);
+    return response;
+}
+
+export async function updateBoughtItem(id) {
+    const response = await client
+        .from('list')
+        .update([{ bbought: true }])
+        .match({ id: id });
+    return response;
+}
+
+export async function deleteList() {
+    const response = await client
+        .from('list')
+        .delete();
+    return response;
+}
+
 export async function getUser() {
     return client.auth.session();
 }
