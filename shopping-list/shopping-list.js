@@ -1,7 +1,7 @@
 import { checkAuth, 
     logout,
     getItem,
-    createDefaultItem,
+    createItem,
     updateBoughtItem,
     deleteList } from '../fetch-utils.js';
 
@@ -30,7 +30,7 @@ listForm.addEventListener('submit', async(e) => {
     const item = data.get('item');
     const quantity = data.get('quantity');
 
-    await createDefaultItem(item, quantity);
+    await createItem(item, quantity);
 
     listForm.reset();
 
@@ -55,7 +55,6 @@ async function displayShoppingListItems() {
             displayShoppingListItems();
             console.log(item);
         });
-     
         
         listEl.append(listItemEl);
         
