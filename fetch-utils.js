@@ -10,13 +10,14 @@ export async function getItem() {
     return checkError(response);
 }
 
-export async function createDefaultItem(item, quantity) {
+export async function createItem(item, quantity) {
     const response = await client
         .from('list')
         .insert ([{ item, 
             quantity,
             bought: false }]);
-    return checkError(response);
+    console.log('response', response);
+    return response;
 }
 
 export async function updateBoughtItem(id) {
