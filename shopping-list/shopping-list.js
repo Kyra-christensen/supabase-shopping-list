@@ -6,7 +6,7 @@ import { checkAuth,
     deleteList } from '../fetch-utils.js';
 
 checkAuth();
-
+import { renderItem } from '../render-utils.js';
 const logoutButton = document.getElementById('logout');
 const listForm = document.querySelector('#form');
 const listEl = document.querySelector('#shopping-list');
@@ -19,6 +19,46 @@ logoutButton.addEventListener('click', () => {
 });
 
 window.addEventListener('load', async() => {
-    displayShoppingListItems();
+    await displayShoppingListItems();
 });
 
+listForm.addEventListener('submit', async(e) => {
+    e.preventDefault();
+
+    const data = new FormData(listForm);
+
+    const item = data.get('item');
+    const quantity = data.get('quantity');
+
+    await createDefaultItem(item, quantity);
+
+    listForm.reset();
+
+    await displayShoppingListItems();
+});
+
+deleteButton.addEventListener('click', async() => {
+    await deleteList();
+
+    await displayShoppingListItems();
+});
+
+async function displayShoppingListItems() {
+    const list = await getItem();
+    listEl.textContent = '';
+
+    for (let item of list) {
+        const listItemEl = renderItem(item);
+
+        if (item.bought === false) {
+            listItemEl.addEventListener('click', async() => {
+                await updateBoughtItem(item.id);
+                displayShoppingListItems();
+                console.log(item);
+            });
+        }
+        
+        listEl.append(listItemEl);
+    }
+     
+}

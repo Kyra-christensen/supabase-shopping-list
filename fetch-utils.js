@@ -7,7 +7,7 @@ export async function getItem() {
     const response = await client
         .from('list')
         .select();
-    return response;
+    return checkError(response);
 }
 
 export async function createDefaultItem(item, quantity) {
@@ -16,13 +16,13 @@ export async function createDefaultItem(item, quantity) {
         .insert ([{ item, 
             quantity,
             bought: false }]);
-    return response;
+    return checkError(response);
 }
 
 export async function updateBoughtItem(id) {
     const response = await client
         .from('list')
-        .update([{ bbought: true }])
+        .update([{ bought: true }])
         .match({ id: id });
     return response;
 }
@@ -31,7 +31,7 @@ export async function deleteList() {
     const response = await client
         .from('list')
         .delete();
-    return response;
+    return checkError(response);
 }
 
 export async function getUser() {
